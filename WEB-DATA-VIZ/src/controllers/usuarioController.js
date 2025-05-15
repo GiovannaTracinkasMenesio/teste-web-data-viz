@@ -20,16 +20,16 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
 
-                        aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
-                             .then((resultadoAquarios) => {
-                                 if (resultadoAquarios.length > 0) {
+                        usuarioModel.autenticar(usuario, senha)
+                             .then((resultadoUsuario) => {
+                                 if (resultadoUsuario.length > 0) {
                                      res.json({
                                          id: resultadoAutenticar[0].id,
                                          usuario: resultadoAutenticar[0].usuario,               
                                          senha: resultadoAutenticar[0].senha,
                                      });
                                  } else {
-                                     res.status(204).json({ aquarios: [] });
+                                     res.status(204).json({ usuario: [] });
                                  }            
                              })
                     } else if (resultadoAutenticar.length == 0) {
